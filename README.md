@@ -1,0 +1,4 @@
+getargs
+=======
+
+Learning Haskell GetArgs
