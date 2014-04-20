@@ -6,10 +6,15 @@ import  Control.Monad   (forM_)
 -- | The main entry point.
 main :: IO ()
 main = do
-    putStrLn "Welcome to FP Haskell Center!"
+    putStrLn "Program name:"
     pname <-getProgName
-    args <- getArgs
     putStrLn pname
+    putStrLn "Program arguments:"
+    args <- getArgs
     forM_ args $ \arg ->
-        putStrLn arg
-    putStrLn "Have a good day!"
+        putStrLn $ "  " ++ arg
+    putStrLn "Environment Variables:"
+    envs <- getEnvironment
+    forM_ envs $ \(var, val) ->
+        putStrLn $ "  " ++ var ++ " = " ++ val
+    putStrLn "Good day!"
