@@ -17,4 +17,4 @@ main = do
     envs <- getEnvironment
     forM_ envs $ \(var, val) ->
         putStrLn $ "  " ++ var ++ " = " ++ val
-    putStrLn "Good day!"
+    putStrLn "Have a good day!"
