@@ -1,20 +1,29 @@
--- | Main entry point to the application.
 module Main where
-import  System.Environment
-import  Control.Monad   (forM_)
+import           Control.Monad         (forM_)
+import           System.Console.GetOpt
+import           System.Environment
+import           Opts
 
--- | The main entry point.
 main :: IO ()
 main = do
-    putStrLn "Program name:"
+
+    -- Get and print info from the environment
+    argsRaw <- getArgs
     pname <-getProgName
-    putStrLn pname
-    putStrLn "Program arguments:"
-    args <- getArgs
-    forM_ args $ \arg ->
+    putStrLn $ "Program name: " ++ show pname
+    putStrLn "Program arguments (raw):"
+    forM_ argsRaw $ \arg ->
         putStrLn $ "  " ++ arg
     putStrLn "Environment Variables:"
     envs <- getEnvironment
     forM_ envs $ \(var, val) ->
         putStrLn $ "  " ++ var ++ " = " ++ val
-    putStrLn "Have a good day!"
+    
+    -- Process the options/arguments
+    (flags, arguments) <- processOpts argsRaw
+    forM_ flags $ \flag ->
+        putStrLn $ "  " ++ show flag
+    putStrLn "Arguments:"
+    forM_ arguments $ \arg ->
+        putStrLn $ "  " ++ arg
+    putStrLn "Good day!"

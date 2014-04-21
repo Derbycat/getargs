@@ -1,4 +1,4 @@
-module Opts1 where
+module Opts where
     
     import System.Console.GetOpt
     import Data.Maybe ( fromMaybe )
@@ -28,4 +28,4 @@ module Opts1 where
        case getOpt Permute options argv of
           (o,n,[]  ) -> return (o,n)
           (_,_,errs) -> ioError $ userError $ concat errs ++ usageInfo header options
-      where header = "Usage: klwtest [OPTION...] files..."
+      where header = "Usage: getopt-test [OPTION...] files..."
