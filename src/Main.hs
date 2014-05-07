@@ -1,8 +1,10 @@
 module Main where
-import           Control.Monad         (forM_)
-import           System.Console.GetOpt
-import           System.Environment
-import           Opts
+import          Control.Monad         (forM_)
+import          System.Console.GetOpt
+import          System.Environment
+import          Opts
+import          Text.Printf
+
 
 main :: IO ()
 main = do
@@ -10,20 +12,20 @@ main = do
     -- Get and print info from the environment
     argsRaw <- getArgs
     pname <-getProgName
-    putStrLn $ "Program name: " ++ show pname
-    putStrLn "Program arguments (raw):"
+    printf "Program name: %s\n" pname
+    printf "Program arguments (raw):\n"
     forM_ argsRaw $ \arg ->
-        putStrLn $ "  " ++ arg
-    putStrLn "Environment Variables:"
+        printf "  %s\n" arg
+    printf "Environment Variables:"
     envs <- getEnvironment
     forM_ envs $ \(var, val) ->
-        putStrLn $ "  " ++ var ++ " = " ++ val
+        printf "  %s = %s\n" var val
     
     -- Process the options/arguments
     (flags, arguments) <- processOpts argsRaw
     forM_ flags $ \flag ->
-        putStrLn $ "  " ++ show flag
-    putStrLn "Arguments:"
+        printf "  %s\n" (show flag)
+    printf "Arguments:\n"
     forM_ arguments $ \arg ->
-        putStrLn $ "  " ++ arg
-    putStrLn "Good day!"
+        printf "  %s\n" arg
+    printf "Good day!\n"
